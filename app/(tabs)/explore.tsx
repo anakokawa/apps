@@ -1,102 +1,137 @@
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleSheet, Image, Platform } from 'react-native';
 
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { StyleSheet,ScrollView, Image,Text,View, TouchableOpacity, Linking, } from 'react-native';
+
+const imgmel=require("../../assets/images/melzinha.jpg")
+
+const InstagramLink = async () => {
+  const instagramUrl = "instagram://user?username=ana_kookwa";
+  try {
+    await Linking.openURL(instagramUrl);
+  } catch (error) {
+    console.error("Erro ao abrir o link do Instagram:", error);
+  }
+};
+
+const WhatsAppLink = async () => {
+  const phoneNumber = "5518936189244"; // Substitua pelo número de telefone no formato internacional
+  const message = "Oi"; // Substitua pela mensagem que deseja enviar
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+    message
+  )}`;
+  const supported = await Linking.canOpenURL(whatsappUrl);
+  if (supported) {
+    await Linking.openURL(whatsappUrl);
+  } else {
+    console.error(`Não é possível abrir o URL do WhatsApp: ${whatsappUrl}`);
+  }
+};
+
+const GitHubLink = async () => {
+  const githubUrl = "https://github.com/anakookwa"; // Substitua com o URL do seu repositório
+  const supported = await Linking.canOpenURL(githubUrl);
+  if (supported) {
+    await Linking.openURL(githubUrl);
+  } else {
+    console.error(`Não é possível abrir o URL: ${githubUrl}`);
+  }
+};
+
+const fazerChamada = async () => {
+  // Exemplo de uso
+  const numero = "18936189244"; // Substitua pelo número desejado
+  const url = `tel:${numero}`;
+  try {
+    await Linking.openURL(url);
+  } catch (error) {
+    console.error("Erro ao abrir o cliente de telefone:", error);
+  }
+};
+
+const AbrirGmailApp = async () => {
+  const email = "analaura510251@gmail.com"; // Endereço de e-mail do destinatário
+  const subject = "Mensagem de contato"; // Assunto do e-mail (opcional)
+  const body = "Prazer, preciso falar com você"; // Corpo do e-mail (opcional)
+
+  const url = `mailto:${email}?subject=${subject}&body=${body}`;
+
+  try {
+    await Linking.openURL(url);
+  } catch (error) {
+    console.error("Erro ao abrir o cliente de e-mail:", error);
+  }
+};
 
 export default function TabTwoScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={<Ionicons size={310} name="code-slash" style={styles.headerImage} />}>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
-          </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user's current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText> library
-          to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+   
+    <View style={styles.container}>
+    {/* Imagem de fundo que se move em paralelo */}
+    <Image
+        source={require('../../assets/images/fundo.png')}
+        style={styles.imagemFundo}
+        resizeMode="cover"
+    />
+
+<View style={{display: 'flex'}}>
+      <View style={{justifyContent:'center', alignItems:'center', }}>
+      <Image source={imgmel} resizeMode='cover' style={{width:150, height: 150, borderRadius:80, top:100,}}></Image></View>
+      </View>
+
+
+      <View style={{top:200, alignItems:'center',}}>
+        <TouchableOpacity onPress={InstagramLink} style={{backgroundColor:'#FF1493', width:250, height:40, borderRadius:50,top: 0, elevation: 10}}><Text style={{alignItems:'center', textAlign:'center', top:10}}>INSTAGRAM</Text></TouchableOpacity>
+        <Text></Text>
+        <TouchableOpacity onPress={WhatsAppLink} style={{backgroundColor:'#FF1493', width:250, height:40, borderRadius:50,top:10, elevation: 10}}><Text style={{alignItems:'center', textAlign:'center', top:10}}>WHATSAPP</Text></TouchableOpacity>
+        <Text></Text>
+        <TouchableOpacity onPress={AbrirGmailApp} style={{backgroundColor:'#FF1493', width:250, height:40, borderRadius:50,top:20 ,elevation: 10}}><Text style={{alignItems:'center', textAlign:'center', top:10}}>GMAIL</Text></TouchableOpacity>
+        <Text></Text>
+        <TouchableOpacity onPress={fazerChamada} style={{backgroundColor:'#FF1493', width:250, height:40, borderRadius:50,top:30, elevation: 10}}><Text style={{alignItems:'center', textAlign:'center', top:10}}>TELEFONE</Text></TouchableOpacity>
+        <Text></Text>
+        <TouchableOpacity onPress={GitHubLink} style={{backgroundColor:'#FF1493', width:250, height:40, borderRadius:50,top:40, elevation: 10}}><Text style={{alignItems:'center', textAlign:'center', top:10}}>GITHUB</Text></TouchableOpacity>
+        </View>
+     
+
+    <ScrollView contentContainerStyle={styles.scrollViewContent}>
+
+      </ScrollView>
+      </View>
+      
   );
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
+  container: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+},
+imagemFundo: {
     position: 'absolute',
-  },
-  titleContainer: {
-    flexDirection: 'row',
-    gap: 8,
-  },
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%',
+    opacity: 0.6, // Opacidade da imagem de fundo para não sobrecarregar o conteúdo
+},
+scrollViewContent: {
+    padding: 20,
+},
+texto: {
+    fontSize: 16,
+    lineHeight: 24,
+    marginBottom: 20,
+},
+stepContainer: {
+  gap: 8,
+  marginBottom: 8,
+},
+reactLogo: {
+  height: 178,
+  width: 290,
+  bottom: 0,
+  left: 0,
+  position: 'absolute',
+},
+
 });

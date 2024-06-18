@@ -1,8 +1,12 @@
 import { Image, StyleSheet, View, Text, ImageBackground, TouchableOpacity, Linking} from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 
-const imgfundo=require("../../assets/images/fundo.png")
-const imgmel=require("../../assets/images/melzinha.jpg")
+
+const imggato=require("../../assets/images/gato.jpg")
+
+
+
 
 const InstagramLink = async () => {
   const instagramUrl = "instagram://user?username=ana_kookwa";
@@ -37,39 +41,45 @@ const GitHubLink = async () => {
   }
 };
 
+const fazerChamada = async () => {
+  // Exemplo de uso
+  const numero = "18936189244"; // Substitua pelo número desejado
+  const url = `tel:${numero}`;
+  try {
+    await Linking.openURL(url);
+  } catch (error) {
+    console.error("Erro ao abrir o cliente de telefone:", error);
+  }
+};
+
+const AbrirGmailApp = async () => {
+  const email = "analaura510251@gmail.com"; // Endereço de e-mail do destinatário
+  const subject = "Mensagem de contato"; // Assunto do e-mail (opcional)
+  const body = "Prazer, preciso falar com você"; // Corpo do e-mail (opcional)
+
+  const url = `mailto:${email}?subject=${subject}&body=${body}`;
+
+  try {
+    await Linking.openURL(url);
+  } catch (error) {
+    console.error("Erro ao abrir o cliente de e-mail:", error);
+  }
+};
+
 
 export default function HomeScreen() {
   return (
-    <View>
-    <View style={{flex:1}}>
-      {/* <ImageBackground source={imgfundo} resizeMode='cover' style={{width:400 , height:300,}}/> */}
     <View style={{display: 'flex'}}>
       <View style={{justifyContent:'center', alignItems:'center', }}>
-      <Image source={imgmel} resizeMode='cover' style={{width:150, height: 150, borderRadius:100, top:90 }}></Image></View>
+      <Image source={imggato} resizeMode='cover' style={{width:400, height: 200,}}></Image></View>
       </View>
 
-      <View style={{top:190, alignItems:'center',}}>
-        <TouchableOpacity onPress={InstagramLink} style={{backgroundColor:'#FF1493', width:200, height:40, borderRadius:50,}}><Text style={{alignItems:'center', textAlign:'center', top:10}}>INSTAGRAM</Text></TouchableOpacity>
-        <Text></Text>
-        <TouchableOpacity onPress={WhatsAppLink} style={{backgroundColor:'#FF1493', width:200, height:40, borderRadius:50,}}><Text style={{alignItems:'center', textAlign:'center', top:10}}>WHATSAPP</Text></TouchableOpacity>
-        <Text></Text>
-        <TouchableOpacity onPress={InstagramLink} style={{backgroundColor:'#FF1493', width:200, height:40, borderRadius:50,}}><Text style={{alignItems:'center', textAlign:'center', top:10}}>LINKEDIN</Text></TouchableOpacity>
-        <Text></Text>
-        <TouchableOpacity onPress={InstagramLink} style={{backgroundColor:'#FF1493', width:200, height:40, borderRadius:50,}}><Text style={{alignItems:'center', textAlign:'center', top:10}}>TELEFONE</Text></TouchableOpacity>
-        <Text></Text>
-        <TouchableOpacity onPress={GitHubLink} style={{backgroundColor:'#FF1493', width:200, height:40, borderRadius:50,}}><Text style={{alignItems:'center', textAlign:'center', top:10}}>GITHUB</Text></TouchableOpacity>
-      </View>
-      </View>
-      </View>
+      
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
+
   stepContainer: {
     gap: 8,
     marginBottom: 8,
@@ -81,4 +91,12 @@ const styles = StyleSheet.create({
     left: 0,
     position: 'absolute',
   },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+},
+  
+  
 });
+

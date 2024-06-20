@@ -61,6 +61,25 @@ const AbrirGmailApp = async () => {
   }
 };
 
+const LinkedInlink = async () => {
+  // Exemplo de uso
+  const profileId = "ana-laura-8a7953314"; // Substitua pelo ID do perfil desejado
+  try {
+    const linkedInUrl = `linkedin://profile/${profileId}`;
+    const isInstalled = await Linking.canOpenURL(linkedInUrl);
+
+    if (isInstalled) {
+      await Linking.openURL(linkedInUrl);
+    } else {
+      // Se o aplicativo não estiver instalado, redirecione para o perfil na web
+      const webUrl = `https://www.linkedin.com/in/${profileId}`;
+      await Linking.openURL(webUrl);
+    }
+  } catch (error) {
+    console.error("Erro ao abrir o perfil do LinkedIn:", error);
+  }
+};
+
 export default function TabTwoScreen() {
   return (
    
@@ -83,7 +102,7 @@ export default function TabTwoScreen() {
         <Text></Text>
         <TouchableOpacity onPress={WhatsAppLink} style={{backgroundColor:'#FF1493', width:250, height:40, borderRadius:50,top:10, elevation: 10}}><Text style={{alignItems:'center', textAlign:'center', top:10}}>WHATSAPP</Text></TouchableOpacity>
         <Text></Text>
-        <TouchableOpacity onPress={AbrirGmailApp} style={{backgroundColor:'#FF1493', width:250, height:40, borderRadius:50,top:20 ,elevation: 10}}><Text style={{alignItems:'center', textAlign:'center', top:10}}>GMAIL</Text></TouchableOpacity>
+        <TouchableOpacity onPress={LinkedInlink} style={{backgroundColor:'#FF1493', width:250, height:40, borderRadius:50,top:20 ,elevation: 10}}><Text style={{alignItems:'center', textAlign:'center', top:10}}>LINKEDIN</Text></TouchableOpacity>
         <Text></Text>
         <TouchableOpacity onPress={fazerChamada} style={{backgroundColor:'#FF1493', width:250, height:40, borderRadius:50,top:30, elevation: 10}}><Text style={{alignItems:'center', textAlign:'center', top:10}}>TELEFONE</Text></TouchableOpacity>
         <Text></Text>

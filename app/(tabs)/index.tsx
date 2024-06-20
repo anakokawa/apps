@@ -67,16 +67,32 @@ const AbrirGmailApp = async () => {
 };
 
 
+
+
 export default function HomeScreen() {
   return (
     <View style={{display: 'flex'}}>
       <View style={{justifyContent:'center', alignItems:'center', }}>
       <Image source={imggato} resizeMode='cover' style={{width:400, height: 200,}}></Image></View>
+
+      <Text style={{top:20, textAlign:'center', fontSize:30,}}>Bem-vindo ao Nosso Portal de Descobertas!</Text>
+      <View>
+        <Text style={{textAlign:'center'}}>
+ChatGPT
+Bem-vindo ao Nosso Portal de Descobertas!
+
+Explore um mundo de possibilidades através dos nossos botões que te levam a lugares incríveis na web. Aqui, cada clique é uma porta aberta para novas experiências, informações e entretenimento. Navegue com facilidade e descubra tudo o que a internet tem de melhor, com apenas um toque.
+
+Seja bem-vindo à sua jornada digital. Comece a explorar agora mesmo!</Text>
+      </View>
       </View>
 
+    
       
   );
 }
+
+
 
 const styles = StyleSheet.create({
 
